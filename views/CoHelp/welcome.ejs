@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Website</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" href="/css/all.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div class="bgimg">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark py-4 sticky-top">
+      <div class="container">
+        <a href="" class="navbar-brand text-warning font-weight-bold" style="font: normal 36px 'Cookie', cursive;"><span
+            style="color: aliceblue;">Co</span>Help</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsenavbar">
+          <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse text-center" id="collapsenavbar">
+          <ul class="navbar-nav ml-auto text-white">
+            <li class="nav-item">
+              <a href="/get" class="nav-link text-white">Locations in your City</a>
+            </li>
+            <li class="nav-item">
+              <a href="#service" class="nav-link text-white">Services</a>
+            </li>
+            <li class="nav-item">
+              <a href="/add" class="nav-link text-white">Add</a>
+            </li>
+            <% if(!user) {%>
+              <li class="nav-item">
+                <a href="/login" class="nav-link text-white">Login</a>
+              </li>
+              <li class="nav-item">
+                <a href="/register" class="nav-link text-white">Register</a>
+              </li>
+              <li class="nav-item">
+                <a href="#footer" class="nav-link text-white">Contact Us</a>
+              </li>
+              <% }else{ %>
+                <li class="nav-item">
+                  <a href="/logout" class="nav-link text-white">Logout</a>
+                </li>
+                <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container text-center text-white headerset">
+      <h3>If you can't help hundreds</h3>
+      <h2>Help just one!!</h2>
+    </div>
+  </div>
+  <section id= "service" class="container ourservices text-center">
+    <h1>SERVICES</h1>
+    <p>Please take some initiative</p>
+    <div class="row rowsetting">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-10 d-block m-auto">
+        <div class="imgsetting d-block m-auto bg-info"><i class="fas fa-3x fa-hands-helping"></i></div>
+        <h2>Help</h2>
+        <p>If you are capable enough then Please
+          raise your support to as many people as possible.Because many
+          people out their are suffering,which they do not deserve!</p>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-10 d-block m-auto">
+        <div class="imgsetting d-block m-auto bg-info"><i class="far fa-3x fa-address-card"></i></div>
+        <h2>Provide Information</h2>
+        <p>If you know any such person or a group which is in need
+          of immediate help please upload his address in the Provide Info section,
+          so that someone can help him out.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="portfolio bg-light">
+    <div class="container">
+      <h1>FACTS</h1>
+      <br><br>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card box-shadow">
+            <img src="img/Facts/poverty.jpg" class="card-img-top img-fluid">
+            <div class="card-body">
+              <h2 class="card-title">Poverty</h2>
+              <p class="card-text">As the economy plunged into a recession in 2020, India’s vast middle-class also
+                shrank by 3.2 crores in numbers — to 6.6 crores from the pre-pandemic level of 9.9 crores.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card box-shadow">
+            <img src="img/Facts/orphan.jpg" class="card-img-top img-fluid res">
+            <div class="card-body">
+              <h2 class="card-title"> Orphan Children</h2>
+              <p class="card-text">Covid-19 second wave leaves many children orphaned and vulnerable across India
+                In some situations single surviving parent
+                is unable to take care of them financially & psychologically.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card box-shadow">
+            <img src="img/Facts/homeless.jpg" class=" card-img-top card-img img-fluid res ">
+            <div class="card-body">
+              <h2 class="card-title">Homeless</h2>
+              <p class="card-text">While staying home was not an option for many, several people were pushed to
+                homelessness as they were unable to afford housing during the pandemic.Data shows India has more than
+                1.7 million
+                homeless people. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br><br>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card box-shadow">
+            <img src="img/Facts/job.jpg" class="card-img-top img-fluid">
+            <div class="card-body">
+              <h2 class="card-title">People lost Jobs</h2>
+              <p class="card-text">As COVID-19 Second Wave Wreaks Havoc, India Lost Over 7 Million Jobs in April
+                according to CMIE.
+                With 73.5 lakh job losses, the number of employees, both salaried and non-salaried, fell from 39.81
+                crore
+                in March to 39.08 crore in April, for the third straight month.
+
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card box-shadow">
+            <img src="img/Facts/lack.jpg" class="card-img-top img-fluid res">
+            <div class="card-body">
+              <h2 class="card-title">Lack of Resources</h2>
+              <p class="card-text">With the surge in cases, the demand for medical oxygen and hospital
+                beds has been rising fast in India,which caused many lives.But now,
+                nearly 900 million people, often with far fewer resources – now find themselves in the pandemic’s grip.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card box-shadow">
+            <img src="img/Facts/edu.jpg" class="card-img-top img-fluid" style:"height:50px">
+            <div class="card-body">
+              <h2 class="card-title">Education</h2>
+              <p class="card-text">As the economy plunged into a recession in 2020, India’s vast middle-class also
+                shrank by 3.2 crores in numbers — to 6.6 crores from the pre-pandemic level of 9.9 crores.It is our
+                responsibility to educate as many chidren as possible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer id="footer" class="footer-distributed">
+
+    <div class="footer-left">
+      <h3>Co<span>Help</span></h3>
+
+      <p class="footer-links">
+        <a href="#">Home</a>
+        |
+        <a href="#">About</a>
+        |
+        <a href="#">Contact</a>
+        |
+        <a href="#">Blog</a>
+      </p>
+
+      <p class="footer-company-name">Copyright © 2021 <strong>CoHelp</strong> All rights reserved</p>
+    </div>
+
+    <div class="footer-center">
+      <div>
+        <i class="fa fa-map-marker"></i>
+        <p><span>Indore</span>
+          India</p>
+      </div>
+
+      <div>
+        <i class="fa fa-phone"></i>
+        <p>+91 7987471114</p>
+      </div>
+      <div>
+        <i class="fa fa-envelope"></i>
+        <p><a href="mailto:sagar00001.co@gmail.com">harshita13525@gmail.com</a></p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <p class="footer-company-about">
+        <span>About the website</span>
+        <strong>CoHelp</strong> is a website developed by Harshita Patil,Ravi Singh and
+        Shubham Gandhi for helping people during the tough times all are going through due
+        to the pandemic.
+        Main purpose of this site is to help those people who genuinely lack resources
+        and need our support.
+      </p>
+      <div class="footer-icons">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

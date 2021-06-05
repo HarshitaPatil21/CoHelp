@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<style>
+  input[type=text],
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    max-width: 40%;
+    align-items: center;
+    margin-left: 25%;
+  }
+</style>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+</link>
+
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+<script>
+  function geteloc() {
+    var quer = document.getElementById("suggest").value
+    var final_URL = `https://atlas.mapmyindia.com/api/places/geocode?itemCount=1&address=${quer}&access_token=<%=access_token%>`;
+    $(document).ready(function () {
+      $.ajax({
+        url: final_URL,
+        dataType: 'jsonp',
+        success: function (results) {
+          console.log(results.copResults.eLoc);
+          document.getElementById('elocate').value = results.copResults.eLoc;
+        }
+      });
+    })
+  }
+
+  function validateForm() {
+    var x = document.forms["myForm"]["Address"].value;
+    var y = document.forms["myForm"]["cityname"].value;
+    if (x == "" || y == "") {
+      alert("Fields must be filled out");
+      return false;
+    }
+    else {
+      alert('Thank you for Helping');
+    }
+
+  }
+</script>
+
+<script>
+
+
+
+  $(document).ready(function () {
+
+    $("#suggest").autocomplete({
+      delay: 20,
+      source: function (request, response) {
+
+        var suggestURL = `https://atlas.mapmyindia.com/api/places/geocode?itemCount=5&address=%QUERY&access_token=<%=access_token%>`;
+        suggestURL = suggestURL.replace('%QUERY', request.term);
+
+        // JSONP Request
+        $.ajax({
+          "async": true,
+          "crossDomain": true,
+          url: suggestURL,
+          dataType: "jsonp",
+          //jsonp: "jsonp",
+          headers: {
+            'Authorization': 'bearer ' + '<%=access_token%>',
+            'Access-Control-Allow-Origin': '*',
+
+          },
+          success: function (results) {
+            console.log(results)
+
+
+            //var datalist=document.getElementById("suggest_address");
+            document.getElementById('hii1').innerHTML = results.copResults[0].formattedAddress;
+            document.getElementById('hii2').innerHTML = results.copResults[1].formattedAddress;
+            document.getElementById('hii3').innerHTML = results.copResults[2].formattedAddress;
+            document.getElementById('hii4').innerHTML = results.copResults[3].formattedAddress;
+            document.getElementById('hii5').innerHTML = results.copResults[4].formattedAddress;
+            //datalist.appendChild(option);
+            geteloc();
+          },
+          error: function (e) {
+            alert(e.statusText);
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<body>
+
+  <h3 style="margin-left: 38%;font-size: 30px;">Add Location</h3>
+
+  <div style="align-items: center;">
+ 
+    <form name="myForm" onsubmit="return validateForm()" action="/add" method="POST" style=" align-items: center;">
+      <label for="country">Address</label>
+      <input type="text" id="suggest" name="Address" placeholder="Full Address.." list="suggest_address">
+      <datalist id="suggest_address">
+        <option id="hii1"></option>
+        <option id="hii2"></option>
+        <option id="hii3"></option>
+        <option id="hii4"></option>
+        <option id="hii5"></option>
+      </datalist>
+
+      <label for="lname">Phone Number(Optional)</label>
+      <input type="text" id="lname" name="Number" placeholder="Number..">
+
+      <label for="fname">City</label>
+      <input type="text" id="districtname" list="total",name="cityname" placeholder="City Name..">
+      <datalist id="total">
+        <%  for(var i=0; i<district_array.length ;i++) {  %>
+            <option value=<%=district_array[i]%>>
+          <% console.log(district_array[i]) %>
+       <% } %>
+      </datalist>
+
+      <input id="elocate" name="link" hidden>
+      <input type="submit" value="Submit">
+
+    </form>
+  </div>
+  <script>
+    function autocomplete(inp, arr) {
+      /*the autocomplete function takes two arguments,
+      the text field element and an array of possible autocompleted values:*/
+      var currentFocus;
+      /execute a function when someone writes in the text field:/
+      inp.addEventListener("input", function(e) {
+          var a, b, i, val = this.value;
+          /close any already open lists of autocompleted values/
+          closeAllLists();
+          if (!val) { return false;}
+          currentFocus = -1;
+          /create a DIV element that will contain the items (values):/
+          a = document.createElement("div");
+          a.setAttribute("id", this.id + "autocomplete-list");
+          a.setAttribute("class", "autocomplete-items");
+          /append the DIV element as a child of the autocomplete container:/
+          this.parentNode.appendChild(a);
+          /for each item in the array.../
+          for (i = 0; i < arr.length; i++) {
+            /check if the item starts with the same letters as the text field value:/
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+              /create a DIV element for each matching element:/
+              b = document.createElement("div");
+              /make the matching letters bold:/
+              b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+              b.innerHTML += arr[i].substr(val.length);
+              /insert a input field that will hold the current array item's value:/
+              b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+              /execute a function when someone clicks on the item value (DIV element):/
+              b.addEventListener("click", function(e) {
+                  /insert the value for the autocomplete text field:/
+                  inp.value = this.getElementsByTagName("input")[0].value;
+                  /*close the list of autocompleted values,
+                  (or any other open lists of autocompleted values:*/
+                  closeAllLists();
+              });
+              a.appendChild(b);
+            }
+          }
+      });
+      /execute a function presses a key on the keyboard:/
+      inp.addEventListener("keydown", function(e) {
+          var x = document.getElementById(this.id + "autocomplete-list");
+          if (x) x = x.getElementsByTagName("div");
+          if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /and and make the current item more visible:/
+            addActive(x);
+          } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /and and make the current item more visible:/
+            addActive(x);
+          } else if (e.keyCode == 13) {
+            /If the ENTER key is pressed, prevent the form from being submitted,/
+            e.preventDefault();
+            if (currentFocus > -1) {
+              /and simulate a click on the "active" item:/
+              if (x) x[currentFocus].click();
+            }
+          }
+      });
+      function addActive(x) {
+        /a function to classify an item as "active":/
+        if (!x) return false;
+        /start by removing the "active" class on all items:/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /add class "autocomplete-active":/
+        x[currentFocus].classList.add("autocomplete-active");
+      }
+      function removeActive(x) {
+        /a function to remove the "active" class from all autocomplete items:/
+        for (var i = 0; i < x.length; i++) {
+          x[i].classList.remove("autocomplete-active");
+        }
+      }
+      function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+          if (elmnt != x[i] && elmnt != inp) {
+            x[i].parentNode.removeChild(x[i]);
+          }
+        }
+      }
+      /execute a function when someone clicks in the document:/
+      document.addEventListener("click", function (e) {
+          closeAllLists(e.target);
+      });
+    }
+    
+    
+   
+    
+    //initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:/
+    autocomplete(document.getElementById("districtname"), district_array);
+    </script>
+</body>
+
+</html>
